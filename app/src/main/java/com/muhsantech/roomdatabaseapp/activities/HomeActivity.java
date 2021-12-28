@@ -21,7 +21,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         DataBaseProvider dataBaseProvider = DataBaseProvider.getDbConnection(getApplicationContext());
         List<User> usersList =  dataBaseProvider.getUserDao().getAllUser();
@@ -34,5 +34,11 @@ public class HomeActivity extends AppCompatActivity {
 
         binding.recyclerView.setAdapter(myAdapter);
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
     }
 }
